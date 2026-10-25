@@ -1,0 +1,41 @@
+# Publication automatique de Prothèse Care sur GitHub Pages.
+# Chaque mise à jour poussée sur la branche de travail republie le site.
+name: Publier Prothese Care sur GitHub Pages
+
+on:
+  push:
+    branches: ["arena/7431ea3d-proth-se-care"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer le code du projet
+        uses: actions/checkout@v4
+
+      - name: Configurer GitHub Pages (activation automatique si necessaire)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Televerser les fichiers du site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deployer sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
