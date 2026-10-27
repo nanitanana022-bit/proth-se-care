@@ -80,12 +80,17 @@ input, select, textarea { font-family: inherit; font-size: 14px; }
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.brand-svg { width: 31px; height: 31px; display: block; }
+.brand-svg { width: 35px; height: auto; display: block; }
 .brand-name {
   font-family: "Fraunces", Georgia, serif;
   font-size: 19px; font-weight: 700; color: #fff; display: block; letter-spacing: .2px;
+  white-space: nowrap;
 }
-.brand-sub { font-size: 11px; color: #9FB4CA; display: block; margin-top: 1px; }
+.brand-care { color: #3DBFA9; }
+.brand-sub {
+  font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: #9FB4CA; display: block; margin-top: 3px; white-space: nowrap;
+}
 
 .nav { display: flex; flex-direction: column; gap: 3px; flex: 1; }
 .nav-item {
