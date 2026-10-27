@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦷</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230E2B47'/><path d='M7.5 21.5c0-6.9 7.4-12 16.5-12s16.5 5.1 16.5 12c0 1.5-1.2 2.5-2.7 2.5H10.2c-1.5 0-2.7-1-2.7-2.5Z' fill='%232E9E8F'/><g fill='white'><rect x='10' y='23' width='4.1' height='10.5' rx='1.9'/><rect x='14.8' y='23' width='4.1' height='9.5' rx='1.9'/><rect x='19.6' y='23' width='4.1' height='12.5' rx='1.9'/><rect x='24.4' y='23' width='4.1' height='12.5' rx='1.9'/><rect x='29.2' y='23' width='4.1' height='9.5' rx='1.9'/><rect x='34' y='23' width='4.1' height='10.5' rx='1.9'/></g></svg>">
 </head>
 <body>
 
@@ -17,7 +17,20 @@
   <!-- ================= BARRE LATÉRALE ================= -->
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-logo">🦷</div>
+      <div class="brand-logo" aria-hidden="true">
+        <!-- Logo Prothèse Care : arcade prothétique (bande gingivale et dents) -->
+        <svg class="brand-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Prothèse Care">
+          <path d="M7.5 21.5c0-6.9 7.4-12 16.5-12s16.5 5.1 16.5 12c0 1.5-1.2 2.5-2.7 2.5H10.2c-1.5 0-2.7-1-2.7-2.5Z" fill="#2E9E8F"/>
+          <g fill="#FFFFFF">
+            <rect x="10" y="23" width="4.1" height="10.5" rx="1.9"/>
+            <rect x="14.8" y="23" width="4.1" height="9.5" rx="1.9"/>
+            <rect x="19.6" y="23" width="4.1" height="12.5" rx="1.9"/>
+            <rect x="24.4" y="23" width="4.1" height="12.5" rx="1.9"/>
+            <rect x="29.2" y="23" width="4.1" height="9.5" rx="1.9"/>
+            <rect x="34" y="23" width="4.1" height="10.5" rx="1.9"/>
+          </g>
+        </svg>
+      </div>
       <div class="brand-text">
         <span class="brand-name">Prothèse&nbsp;Care</span>
         <span class="brand-sub">Service de prothèse dentaire</span>
@@ -25,24 +38,11 @@
     </div>
 
     <nav class="nav">
-      <span class="nav-label">Pilotage</span>
       <button class="nav-item active" data-view="dashboard"><span class="nav-ico">▦</span> Tableau de bord</button>
       <button class="nav-item" data-view="patients"><span class="nav-ico">☰</span> Patients <span class="nav-badge" id="badgePatients"></span></button>
-      <button class="nav-item" data-view="rendezvous"><span class="nav-ico">🗓</span> Rendez-vous <span class="nav-badge" id="badgeRdv"></span></button>
-
-      <span class="nav-label">Suivi clinique</span>
-      <button class="nav-item" data-view="laboratoire"><span class="nav-ico">⚙</span> Laboratoire externe <span class="nav-badge alert" id="badgeLabo"></span></button>
-      <button class="nav-item" data-view="poses"><span class="nav-ico">✓</span> Poses &amp; contrôles <span class="nav-badge" id="badgePoses"></span></button>
     </nav>
 
     <div class="sidebar-footer">
-      <div class="user-chip">
-        <div class="avatar avatar-teacher">NB</div>
-        <div>
-          <div class="user-name">Pr Nadia Benali</div>
-          <div class="user-role">Chef de service</div>
-        </div>
-      </div>
       <button class="btn-reset" id="btnReset" title="Remettre les données de démonstration à zéro">↺ Réinitialiser la démo</button>
       <p class="demo-note">Prototype de démonstration — données fictives, ne pas utiliser en situation réelle.</p>
     </div>
@@ -57,16 +57,12 @@
       </div>
       <div class="topbar-actions">
         <div class="topbar-date" id="topbarDate"></div>
-        <button class="btn btn-primary" id="btnNouveauPatient">+ Nouveau patient</button>
       </div>
     </header>
 
     <section id="view-dashboard" class="view active"></section>
     <section id="view-patients" class="view"></section>
     <section id="view-patient" class="view"></section>
-    <section id="view-rendezvous" class="view"></section>
-    <section id="view-laboratoire" class="view"></section>
-    <section id="view-poses" class="view"></section>
   </main>
 </div>
 
@@ -74,7 +70,7 @@
 <div class="modal-overlay" id="modalPatient">
   <div class="modal">
     <div class="modal-head">
-      <h2>Nouveau patient</h2>
+      <h2>Ajouter un patient</h2>
       <button class="modal-close" data-close="modalPatient">✕</button>
     </div>
     <form id="formPatient" class="form">
@@ -91,27 +87,20 @@
         <label>Téléphone
           <input type="text" name="telephone" placeholder="Ex. 0550 00 00 00">
         </label>
+        <label class="full">Adresse
+          <input type="text" name="adresse" placeholder="Ex. Rue des Frères Bouadou, Alger">
+        </label>
         <label class="full">Type de prothèse envisagée *
-          <select name="typeProthese" required>
-            <option>Prothèse amovible complète bimaxillaire</option>
-            <option>Prothèse amovible complète maxillaire</option>
-            <option>Prothèse amovible complète mandibulaire</option>
-            <option>Prothèse amovible partielle (stellite)</option>
-            <option>Prothèse amovible partielle provisoire</option>
-            <option>Couronne unitaire céramique</option>
-            <option>Couronne unitaire céramo-métallique</option>
-            <option>Bridge céramo-métallique 3 éléments</option>
-            <option>Prothèse sur implants</option>
-          </select>
+          <input type="text" name="traitementEnvisage" required placeholder="Ex. Prothèse amovible complète bimaxillaire">
         </label>
         <label class="full">Motif de consultation
-          <textarea name="motif" rows="2" placeholder="Décrivez brièvement le motif…"></textarea>
+          <textarea name="motif" rows="2" placeholder="Décrivez brièvement le motif de la consultation…"></textarea>
         </label>
-        <label>Étudiant responsable
-          <select name="etudiantId" id="selectEtudiantPatient"></select>
+        <label class="full">Antécédents
+          <textarea name="antecedents" rows="3" placeholder="Antécédents médicaux et dentaires pertinents…"></textarea>
         </label>
-        <label>Enseignant superviseur
-          <select name="enseignantId" id="selectEnseignantPatient"></select>
+        <label class="full">Médecin responsable
+          <input type="text" name="medecinResponsable" placeholder="Ex. Dr Karim Boudiaf">
         </label>
       </div>
       <div class="form-actions">
@@ -131,67 +120,19 @@
     </div>
     <form id="formRdv" class="form">
       <div class="form-grid">
-        <label class="full">Patient *
-          <select name="patientId" id="selectPatientRdv" required></select>
+        <label class="full">Nom du patient
+          <input type="text" name="patientNom" id="champPatientRdv" readonly tabindex="-1">
         </label>
-        <label>Date *
-          <input type="date" name="date" required>
-        </label>
-        <label>Heure *
-          <input type="time" name="heure" required value="09:00">
-        </label>
-        <label>Durée (minutes)
-          <select name="duree"><option>30</option><option selected>45</option><option>60</option><option>90</option></select>
-        </label>
-        <label>Box
-          <select name="box"><option>Box 1</option><option>Box 2</option><option>Box 3</option><option>Box 4</option><option>Box 5</option></select>
+        <label class="full">Date et heure du rendez-vous *
+          <input type="datetime-local" name="dateHeure" required>
         </label>
         <label class="full">Motif du rendez-vous *
-          <input type="text" name="motif" required placeholder="Ex. Essayage du montage des dents">
+          <input type="text" name="motif" required placeholder="Ex. Essayage des maquettes en bouche">
         </label>
       </div>
       <div class="form-actions">
         <button type="button" class="btn btn-ghost" data-close="modalRdv">Annuler</button>
-        <button type="submit" class="btn btn-primary">Planifier</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ================= MODALE : NOUVEL ENVOI LABORATOIRE ================= -->
-<div class="modal-overlay" id="modalLabo">
-  <div class="modal">
-    <div class="modal-head">
-      <h2>Nouvel envoi au laboratoire</h2>
-      <button class="modal-close" data-close="modalLabo">✕</button>
-    </div>
-    <form id="formLabo" class="form">
-      <div class="form-grid">
-        <label class="full">Patient *
-          <select name="patientId" id="selectPatientLabo" required></select>
-        </label>
-        <label class="full">Laboratoire *
-          <select name="laboratoireId" id="selectLabo" required></select>
-        </label>
-        <label class="full">Travail demandé *
-          <input type="text" name="travail" required placeholder="Ex. Châssis métallique chrome-cobalt">
-        </label>
-        <label>Date d'envoi *
-          <input type="date" name="dateEnvoi" required>
-        </label>
-        <label>Retour souhaité *
-          <input type="date" name="dateRetourPrevue" required>
-        </label>
-        <label>Teinte
-          <input type="text" name="teinte" placeholder="Ex. A2">
-        </label>
-        <label class="full">Prescriptions / notes
-          <textarea name="notes" rows="2" placeholder="Précisions pour le prothésiste…"></textarea>
-        </label>
-      </div>
-      <div class="form-actions">
-        <button type="button" class="btn btn-ghost" data-close="modalLabo">Annuler</button>
-        <button type="submit" class="btn btn-primary">Enregistrer l'envoi</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
       </div>
     </form>
   </div>
